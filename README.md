@@ -6,4 +6,8 @@
 var item = db.MyCollection.findOne({ _id: CSUUID("1b06b4bd-b801-45a0-a61c-a2273d6df494") })
 item._id.toCSUUID()
 # output will be CSUUID("1b06b4bd-b801-45a0-a61c-a2273d6df494")
+
+"1b06b4bd-b801-45a0-a61c-a2273d6df494".toBinDataString()
+# output BinData(3, "vbQGGwG4oEWmHKInPW30lA==")
+var item = db.MyCollection.findOne({ _id: BinData(3, "vbQGGwG4oEWmHKInPW30lA==") })
 ```
