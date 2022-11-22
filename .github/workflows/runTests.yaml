@@ -1,0 +1,18 @@
+name: Run Tests
+on:
+  push:
+    branches:
+      - master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: node
+      
+      name: Prepare Environment
+      steps:
+        - name: checkout
+          uses: actions/checkout@v2
+        
+        - name: node js exists check
+          run: node -v
