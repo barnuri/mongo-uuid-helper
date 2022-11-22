@@ -6,11 +6,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container:
-      image: node
-      volumes:
-        - my_docker_volume:/volume_mount
-      
+    container: node:14.16
+    
     steps:
       - name: checkout
         uses: actions/checkout@v2
