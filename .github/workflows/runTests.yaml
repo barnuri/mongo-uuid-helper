@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: node:14.16
+    container: barnuri23/mongo-with-nodejs
     
     steps:
       - name: checkout
