@@ -161,5 +161,5 @@ String.prototype.toBinData = function () {
 // uid to bin data string
 String.prototype.toBinDataString = function () {
     var base64 = `${this}`.toBase64()
-    return `BinData(3, ${base64})`;
+    return `BinData(3, "${base64}")`;
 }
