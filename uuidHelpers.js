@@ -141,14 +141,25 @@ BinData.prototype.toCSUUID = function () {
     return 'CSUUID("' + uuid + '")';
 }
 
-// uid to bin data
-String.prototype.toBinData = function () {
+// uid to base64
+String.prototype.toBase64 = function () {
     var uuid = `${this.split(/"|'/).length == 3 ? this.split(/"|'/)[1] : this}`.replace(/[{}-]/g, "");
     var a = uuid.substr(6, 2) + uuid.substr(4, 2) + uuid.substr(2, 2) + uuid.substr(0, 2);
     var b = uuid.substr(10, 2) + uuid.substr(8, 2);
     var c = uuid.substr(14, 2) + uuid.substr(12, 2);
     var d = uuid.substr(16, 16);
     hex = a + b + c + d;
-    var base64 = HexToBase64(hex);
+    return HexToBase64(hex);
+}
+
+// uid to bin data
+String.prototype.toBinData = function () {
+    var base64 = `${this}`.toBase64()
     return new BinData(3, base64);
+}
+
+// uid to bin data string
+String.prototype.toBinDataString = function () {
+    var base64 = `${this}`.toBase64()
+    return `BinData(3, ${base64})`;
 }
