@@ -8,11 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node
+      volumes:
+        - my_docker_volume:/volume_mount
       
-      name: Prepare Environment
-      steps:
-        - name: checkout
-          uses: actions/checkout@v2
-        
-        - name: node js exists check
-          run: node -v
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: node js exists check
+        run: node -v
