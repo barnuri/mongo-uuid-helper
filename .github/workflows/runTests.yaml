@@ -17,3 +17,6 @@ jobs:
 
       - name: node js exists check
         run: node -v
+        
+      - name: node js exists check
+        run: node -v
