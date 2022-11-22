@@ -17,5 +17,10 @@ jobs:
       - name: node js exists check
         run: node -v
         
-      - name: node js exists check
-        run: node -v
+      - name: run test
+        run: |
+          (exec mongod &> /dev/null &)
+          sleep 5
+          mongosh --file uuidHelpers.js --file ./tests/test.js
+          
+          
