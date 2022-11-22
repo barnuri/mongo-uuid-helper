@@ -69,7 +69,7 @@ function PYUUID(uuid) {
     return new BinData(3, base64);
 }
 
-BinData.prototype.toHex() = function () { 
+BinData.prototype.toHex = function () { 
     return this.toString("hex");
 }
 
