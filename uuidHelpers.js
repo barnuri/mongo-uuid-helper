@@ -129,3 +129,26 @@ function TestUUIDHelperFunctions() {
     print(csuuid.toHexUUID());
     print(pyuuid.toHexUUID());
 }
+
+BinData.prototype.toCSUUID = function () {
+    var hex = this.toHex();
+    var a = hex.substr(6, 2) + hex.substr(4, 2) + hex.substr(2, 2) + hex.substr(0, 2);
+    var b = hex.substr(10, 2) + hex.substr(8, 2);
+    var c = hex.substr(14, 2) + hex.substr(12, 2);
+    var d = hex.substr(16, 16);
+    hex = a + b + c + d;
+    var uuid = hex.substr(0, 8) + '-' + hex.substr(8, 4) + '-' + hex.substr(12, 4) + '-' + hex.substr(16, 4) + '-' + hex.substr(20, 12);
+    return 'CSUUID("' + uuid + '")';
+}
+
+// uid to bin data
+String.prototype.toBinData = function () {
+    var uuid = `${this.split(/"|'/).length == 3 ? this.split(/"|'/)[1] : this}`.replace(/[{}-]/g, "");
+    var a = uuid.substr(6, 2) + uuid.substr(4, 2) + uuid.substr(2, 2) + uuid.substr(0, 2);
+    var b = uuid.substr(10, 2) + uuid.substr(8, 2);
+    var c = uuid.substr(14, 2) + uuid.substr(12, 2);
+    var d = uuid.substr(16, 16);
+    hex = a + b + c + d;
+    var base64 = HexToBase64(hex);
+    return new BinData(3, base64);
+}
