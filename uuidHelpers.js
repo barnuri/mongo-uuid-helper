@@ -17,6 +17,19 @@
 //      csuuid.toHexUUID() => 'HexData(3, "33221100-5544-7766-8899-aabbccddeeff")'
 //      pyuuid.toHexUUID() => 'HexData(3, "00112233-4455-6677-8899-aabbccddeeff")'
 
+// usage
+/*
+# copy uuidHelpers.js raw to mongo shell
+var item = db.MyCollection.findOne({ _id: CSUUID("1b06b4bd-b801-45a0-a61c-a2273d6df494") })
+item._id.toCSUUID()
+// output will be CSUUID("1b06b4bd-b801-45a0-a61c-a2273d6df494")
+
+"1b06b4bd-b801-45a0-a61c-a2273d6df494".toBinDataString()
+// output BinData(3, "vbQGGwG4oEWmHKInPW30lA==")
+var item = db.MyCollection.findOne({ _id: BinData(3, "vbQGGwG4oEWmHKInPW30lA==") })
+*/
+
+
 function HexToBase64(hex) {
     var base64Digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     var base64 = "";
@@ -111,7 +124,8 @@ BinData.prototype.toPYUUID = function () {
 BinData.prototype.toHexUUID = function () {
     var hex = this.toHex();
     var uuid = hex.substr(0, 8) + '-' + hex.substr(8, 4) + '-' + hex.substr(12, 4) + '-' + hex.substr(16, 4) + '-' + hex.substr(20, 12);
-    return 'HexData(' + this.subtype() + ', "' + uuid + '")';
+    var subType = this.subtype ? this.subtype() : this.sub_type;
+    return 'HexData(' + subType + ', "' + uuid + '")';
 }
 
 function TestUUIDHelperFunctions() {
